@@ -1,0 +1,36 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "Repeat the prompted word as many times as possible",
+          "examplePhrases": [
+            "Alexa open word word sample skill",
+            "open word word sample skill",
+            "word word sample skill"
+          ],
+          "name": "Sample Skill GameON",
+          "description": "Alexa will prompt a word and you would to have to repeat this as many times as possible. She will also tell you your score based on your repetition. "
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Requires a GameOn account",
+      "category": "GAMES",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/custom",
+          "uri": "ask-custom-SampleSkill-default"
+        },
+        "interfaces": [
+          {
+            "type": "ALEXA_PRESENTATION_APL"
+          }
+        ]
+      }
+    },
+    "manifestVersion": "1.0"
+  }
+}
