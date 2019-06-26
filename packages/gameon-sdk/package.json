@@ -1,8 +1,14 @@
 {
   "name": "@alexa-games/gameon-sdk",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "SDK for Amazon GameOn",
-  "keywords": ["amazon", "gameon", "tournaments", "leaderboards", "gaming"],
+  "keywords": [
+    "amazon",
+    "gameon",
+    "tournaments",
+    "leaderboards",
+    "gaming"
+  ],
   "author": "Amazon",
   "license": "Apache-2.0",
   "repository": {

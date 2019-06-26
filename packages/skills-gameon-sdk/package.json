@@ -1,8 +1,19 @@
 {
   "name": "@alexa-games/skills-gameon-sdk",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Alexa Skills SDK for Amazon GameOn",
-  "keywords": ["amazon", "alexa", "skills", "gameon", "alexa skills", "alexa skills kit", "ask", "tournaments", "leaderboards", "gaming"],
+  "keywords": [
+    "amazon",
+    "alexa",
+    "skills",
+    "gameon",
+    "alexa skills",
+    "alexa skills kit",
+    "ask",
+    "tournaments",
+    "leaderboards",
+    "gaming"
+  ],
   "author": "Amazon",
   "license": "Apache-2.0",
   "repository": {
@@ -47,7 +58,7 @@
     "test:coverage": "npx nyc mocha --require ts-node/register test/**/*.spec.ts"
   },
   "dependencies": {
-    "@alexa-games/gameon-sdk": "^0.0.0",
+    "@alexa-games/gameon-sdk": "^0.0.1",
     "aws-sdk": "^2.404.0",
     "ordinal": "^1.0.2",
     "random-words": "^1.1.0",
