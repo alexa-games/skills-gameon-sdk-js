@@ -1,0 +1,26 @@
+.DS_Store
+node_modules
+packages/**/lib
+package-lock.json
+
+# Ignore auto generated docs, but keep the theme
+docs/*
+!docs/theme
+!docs/theme/*
+docs/theme/.DS_Store
+
+# AWS-specific
+**/aws-config.json
+
+# Lerna Tool
+lerna-debug.log
+
+# JetBrains Tools
+.idea
+
+# VsCode
+.vscode
+
+# Coverage directory used by tools like istanbul
+coverage
+.nyc_output

@@ -1,0 +1,12 @@
+{
+  "name": "word-word-lite",
+  "description": "Lite version of the Word Word Alexa Skill that showcases the Skills GameOn SDK for Node.js",
+  "private": true,
+  "keywords": ["alexa", "game", "skill"],
+  "author": "Amazon",
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "@alexa-games/skills-gameon-sdk": "^0.0.0",
+    "ask-sdk": "^2.0.0"
+  }
+}
