@@ -13,7 +13,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@alexa-games/skills-gameon-sdk": "^0.0.1",
+    "@alexa-games/skills-gameon-sdk": "^0.1.0",
     "ask-sdk": "^2.0.0"
   },
   "devDependencies": {
