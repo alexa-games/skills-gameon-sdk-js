@@ -1,6 +1,6 @@
 {
   "name": "@alexa-games/skills-gameon-sdk",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Alexa Skills SDK for Amazon GameOn",
   "keywords": [
     "amazon",
@@ -58,7 +58,7 @@
     "test:coverage": "npx nyc mocha --require ts-node/register test/**/*.spec.ts"
   },
   "dependencies": {
-    "@alexa-games/gameon-sdk": "^0.0.1",
+    "@alexa-games/gameon-sdk": "^0.1.0",
     "aws-sdk": "^2.404.0",
     "ordinal": "^1.0.2",
     "random-words": "^1.1.0",
