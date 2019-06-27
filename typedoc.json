@@ -1,0 +1,16 @@
+{
+    "name": "Skills GameOn SDK",
+    "mode": "file",
+    "out": "docs/typedoc",
+    "theme": "./docs/theme",
+    "ignoreCompilerErrors": false,
+    "preserveConstEnums": true,
+    "excludeExternals": true,
+    "excludePrivate": true,
+    "exclude": "**/test/**",
+    "hideGenerator": true,
+    "target": "ES6",
+    "module": "commonjs",
+    "readme": "./README.md",
+    "media": "./media"
+}

@@ -1,0 +1,67 @@
+{
+  "name": "@alexa-games/gameon-sdk",
+  "version": "0.0.1",
+  "description": "SDK for Amazon GameOn",
+  "keywords": [
+    "amazon",
+    "gameon",
+    "tournaments",
+    "leaderboards",
+    "gaming"
+  ],
+  "author": "Amazon",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexa-games/skills-gameon-sdk-js"
+  },
+  "engines": {
+    "node": ">=8.10.0"
+  },
+  "main": "lib/index.js",
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "html",
+      "text"
+    ],
+    "all": false
+  },
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "build": "npm run test && npm run clean:artifacts && npm run compile",
+    "clean:artifacts": "rm -rf lib",
+    "compile": "npx tsc -p tsconfig.compile.json",
+    "lint": "npx tslint -p tsconfig.lint.json -c ../../tslint.json",
+    "prepublish": "npm run build",
+    "pretest": "npm run lint",
+    "test": "npx mocha --opts ../../mocha.opts './test/**/*.spec.ts'",
+    "test:coverage": "npx nyc mocha --require ts-node/register test/**/*.spec.ts"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/nock": "^9.3.1",
+    "@types/sinon": "^7.0.6",
+    "chai": "^4.2.0",
+    "mocha": "^6.0.1",
+    "nock": "^10.0.6",
+    "nyc": "^13.3.0",
+    "sinon": "^7.2.4",
+    "source-map-support": "^0.5.10",
+    "ts-node": "^8.0.2",
+    "tsconfig-paths": "^3.8.0",
+    "tslint": "^5.12.1",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.3333"
+  }
+}
