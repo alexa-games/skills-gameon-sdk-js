@@ -1,0 +1,22 @@
+{
+  "name": "skills-gameon-sdk-js",
+  "scripts": {
+    "bootstrap": "npx lerna bootstrap",
+    "build": "npx lerna run build",
+    "build:gameon-sdk": "npx lerna run build --scope @alexa-games/gameon-sdk",
+    "build:skills-gameon-sdk": "npx lerna run build --scope @alexa-games/skills-gameon-sdk",
+    "clean": "npm run clean:dependencies && npm run clean:artifacts",
+    "clean:artifacts": "npx lerna run clean:artifacts",
+    "clean:dependencies": "rm -rf node_modules && npx lerna clean --yes",
+    "compile": "npx lerna run compile",
+    "document": "npx typedoc ./packages",
+    "lint": "npx lerna run lint",
+    "postinstall": "npm run bootstrap",
+    "test": "npx lerna run test",
+    "test:skills-gameon-sdk": "npx lerna run test --scope @alexa-games/skills-gameon-sdk"
+  },
+  "devDependencies": {
+    "lerna": "3.13.2"
+  },
+  "dependencies": {}
+}
