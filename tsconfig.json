@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "target": "ES2017",
+    "module": "commonjs",
+    "allowJs": false,
+    "declaration": false,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+        "*": ["types/*"],
+      "@test/*": ["test/*"]
+    },
+    "types": ["node", "mocha"],
+    "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "lib": [
+      "es2017",
+      "dom",
+      "scripthost",
+      "dom.iterable",
+      "esnext.asynciterable"
+    ],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}

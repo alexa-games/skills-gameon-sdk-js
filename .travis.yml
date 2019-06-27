@@ -1,0 +1,68 @@
+language: node_js
+
+node_js:
+  - '12'
+  - '11'
+  - '10'
+  - '9'
+  - '8'
+
+os:
+  - linux
+  - osx
+
+git:
+  depth: false
+
+cache:
+  directories:
+  - $HOME/.npm
+  - node_modules
+  - packages/*/node_modules
+
+stages:
+  - name: compile
+  - name: lint
+  - name: test
+  - name: nightly
+    if: type = cron AND branch = develop
+  - name: publish
+    if: branch = master AND type = push AND tag IS blank
+
+jobs:
+  include:
+    - stage: compile
+      name: 'Compile'
+      script: npm run build
+      before_script:
+        - echo "$TRAVIS_EVENT_TYPE"
+        - echo "$TRAVIS_COMMIT"
+        - echo "$TRAVIS_BRANCH"
+        - echo "$TRAVIS_TAG"
+    - stage: lint
+      name: 'Code Lint'
+      script: npm run lint
+    - stage: nightly
+      name: 'Nightly Build'
+      script:
+        - npm run build
+        - lerna publish --yes --canary --preid nightly.$TRAVIS_BUILD_ID --dist-tag nightly
+      before_script:
+        - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+    - stage: publish
+      name: 'Publish'
+      script:
+        - npm run build
+        - lerna version --github-release --conventional-commits --yes
+        - lerna publish from-git --yes
+      before_script:
+        - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+        - git config user.email $GH_EMAIL
+        - git config user.name $GH_NAME
+        - git remote set-url origin https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git
+        - git checkout master
+      after_script:
+        - git fetch
+        - git checkout -t origin/develop
+        - git merge master
+        - git push
