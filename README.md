@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./media/images/skills-gameon-sdk-banner.png" style="max-width:779px">
+  <img src="./media/images/skills-gameon-sdk-banner.png">
   <br/>
   <h1 align="center">Skills GameOn SDK for Node.js</h1>
   <p align="center"><a href="https://travis-ci.com/alexa-games/skills-gameon-sdk-js/"><img src="https://travis-ci.com/alexa-games/skills-gameon-sdk-js.svg?token=aU3oCtpD6FyRqzKE87WW&branch=master"></a></p>
@@ -30,10 +30,10 @@ Alexa skill developers who publish an Alexa skill using the Skills GameOn SDK du
 * **GameOn SDK** - A dependency free Node.js compatible API client, generated from the GameOn Swagger source with coverage of all the non-Admin API methods.
 * **Skills GameOn SDK** - Common features that Alexa skill developers may want to leverage:
   * Player-focused convenience methods:
-    * `SkillsGameOnApiClient#initializeNewPlayer`
-    * `SkillsGameOnApiClient#refreshPlayerSession`
-    * `SkillsGameOnApiClient#enterTournamentForPlayer`
-    * `SkillsGameOnApiClient#submitScoreForPlayer`
+    * `#initializeNewPlayer`
+    * `#refreshPlayerSession`
+    * `#enterTournamentForPlayer`
+    * `#submitScoreForPlayer`
     * And more!
   * Name generator - for when you want to assign random names to players.
   * Secrets management for deployment on <a href="https://aws.amazon.com/lambda/" target="_blank">AWS Lambda</a>.
@@ -418,7 +418,7 @@ The simplest way to create a player profile is with an instance of PlayerProfile
 ```javascript
 const generator = PlayerProfileGenerator.getGenerator({
     locale: "en-US",
-    avatarBaseUrl: "https://s3.us-east-1.amazonaws.com/YOUR_BUCKET_NAME",
+    avatarBaseUrl: "https://s3.amazonaws.com/YOUR_BUCKET_NAME",
     numberOfUniqueAvatars: 50
 });
 ```
@@ -716,7 +716,7 @@ You'll need an AWS S3 Bucket to hold your encrypted file.
 upload: ./encrypted.txt to s3://YOUR_SKILL_NAME/gameon/secret.txt
 ```
 
-> **NOTE**: Your file's URL will be ```https://s3.amazonaws.com/YOUR_SKILL_NAME/gameon/secret.txt```.
+> **NOTE**: Your file's URL will be ***https://s3.amazonaws.com/YOUR_SKILL_NAME/gameon/secret.txt***.
 > Remember it because you'll need it for the next step.
 
 ##### 4. Decrypt your GameOn API Secret
