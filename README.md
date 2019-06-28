@@ -12,7 +12,8 @@ The Skills GameOn SDK for Node.js provides easy access to Amazon GameOn and crea
 
 ## Amazon GameOn
 
-Alexa skill developers who publish an Alexa skill using the Skills GameOn SDK (or calling the GameOn service via other means) during the beta period will be eligible to receive free plays for usage within the Alexa skill. To qualify for this offer, [click here](https://developer.amazon.com/blogs/alexa/post/671de3de-0635-4626-9371-e926d7d655d6/skills-gameon-sdk) to learn more.
+Amazon GameOn is a set of <a href="https://developer.amazon.com/docs/gameon/game-api-ref.html" target="_blank">flexible APIs</a> that allow you to build cross-platform competitions into your games that drive engagement. In addition to leaderboards, you have an easy tool to strengthen your fanbase with leaderboards and leagues, awarding in-game prizes, and enabling streamers to play with their followers with a simple click. 
+To learn more, see <a href="https://developer.amazon.com/gameon" target="_blank">Amazon GameOn</a>.
 
 ## License
 
@@ -773,10 +774,13 @@ To deploy this sample in your Alexa developer account, you will need to complete
 
    Skill will launch and check if the player has been created. If the player has not been created it will register a new player with GameOn.
    Otherwise, the skill will check if it needs to refresh the player's session with the GameOn services.
+
 1. Challenge
+
    Immediately after launch, the game will move to the challenge state where it gets the challenge word and gives the player
    instructions. The user utterance is mapped to the PLAY_GAME_INTENT which has 52 slot values. An example of this model
    can be found at `samples/word-word-lite/models/en-US.json`.
+
 1. Result
 
    The score is calculated by the skill code and submitted to GameOn. 
