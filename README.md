@@ -14,6 +14,7 @@ The Skills GameOn SDK for Node.js provides easy access to Amazon GameOn and crea
 
 Amazon GameOn is a set of <a href="https://developer.amazon.com/docs/gameon/game-api-ref.html" target="_blank">flexible APIs</a> that allow you to build cross-platform competitions into your games that drive engagement. In addition to leaderboards, you have an easy tool to strengthen your fanbase with leaderboards and leagues, awarding in-game prizes, and enabling streamers to play with their followers with a simple click. 
 To learn more, see <a href="https://developer.amazon.com/gameon" target="_blank">Amazon GameOn</a>.
+
 ## License
 
 The Skills GameOn SDK and GameOn SDK packages are licensed under the
