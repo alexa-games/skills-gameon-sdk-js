@@ -185,6 +185,8 @@ Select `Leaderboard`.
 Note the `Tournament ID` and the `Match ID`. You will need them so that your players
 can enter the tournament, reenter the tournament's match, submit scores to the match,
 and to retrieve the match's leaderboard. The `Tournament ID` can be found in the URL.
+For recurring tournaments, you will need to use the `SkillsGameOnApiClient.getTournamentsByTitle`
+method since the `Tournament ID` changes on each recurrence.
 
 ![GameOn Competition Published Successfully](./media/images/gameon-note-matchid.png)
 
