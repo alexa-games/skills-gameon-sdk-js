@@ -5,8 +5,8 @@ Thank you for your interest in contributing to our project. Whether it's a bug r
 Please read through this document before submitting any issues or pull requests to ensure we have all the necessary
 information to effectively respond to your bug report or contribution.
 
-If you're looking to report a bug or have an idea, follow the [bug and potential feature workflow](#Reporting Bugs and Potential Features). or chat with
-us on the [Slack|Gitter|X  channel](https://github.com/alexa-games/skills-gameon-sdk-js).
+If you're looking to report a bug or have an idea, follow the
+[bug and potential feature workflow](#reporting-bugs-and-potential-features).
 
 Follow the [contribution workflow](#contribution-workflow) for submitting your
 changes to the Skills GameOn SDK for Node.js codebase. If you want to receive high-level but still
@@ -75,9 +75,9 @@ testing. Your contribution needs to meet the following standards:
 * Document all your public functions.
 * Commits in your forked repository may be brief or absent.
 * Document your pull requests. Include the reasoning behind each change, and
-  the testing done. Following [commit message best practices](https://github.com/erlang/otp/wiki/writing-good-commit-messages) is recommend.
+  the testing done. Following [commit message best practices](https://github.com/erlang/otp/wiki/writing-good-commit-messages) is recommended.
   Your pull request will be squashed into a single commit if it is approved.
-* Acknowledge Skills GameOn SDK for Node.js is provisionally licensed as 
+* Acknowledge Skills GameOn SDK for Node.js is provisionally licensed as
   "Restricted Program Materials" under the Program Materials License Agreement(LICENSE) and certify that no
   part of your contribution contravenes this license by signing off on all your
   commits with `git -s`. Ensure that every file in your pull request has a

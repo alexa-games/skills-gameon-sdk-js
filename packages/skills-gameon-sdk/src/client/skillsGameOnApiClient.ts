@@ -542,6 +542,10 @@ export class SkillsGameOnApiClient extends GameOnApiClient {
             getMatchesParams.filterBy
         );
 
+        if (!response) {
+            return { matches: [], playerMatches: [] };
+        }
+
         if (getMatchesParams.tournamentId) {
             if (response.matches) {
                 response.matches = response.matches.filter((item: GetMatchListResponseMatch) => {
