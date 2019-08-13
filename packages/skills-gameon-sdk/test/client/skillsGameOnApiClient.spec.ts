@@ -52,7 +52,7 @@ describe('skillsGameOnApiClient', () => {
             sinon.restore();
         });
 
-        it('Returns original response if tournamentId is not speciifed', async () => {
+        it('Returns original response if tournamentId is not specified', async () => {
             sinon.replace(skillsGameOnApiClient, 'getMatchList', sinon.fake.returns(matchListResponse));
             const matchResponsePlayer = await skillsGameOnApiClient.getMatchListForPlayer({ player: {} as Player });
             expect(matchResponsePlayer).to.be.deep.equal(originalMatchListResponse);
@@ -90,6 +90,16 @@ describe('skillsGameOnApiClient', () => {
                 tournamentId
             });
             expect(matchResponsePlayer).to.be.deep.equal(originalMatchListResponse);
+        });
+
+        it('Returns no matches if response is undefined', async () => {
+            sinon.replace(skillsGameOnApiClient, 'getMatchList', sinon.fake.returns(undefined));
+            const matchResponsePlayer = await skillsGameOnApiClient.getMatchListForPlayer({
+                player: {} as Player,
+                tournamentId: 'not-a-match'
+            });
+            expect(matchResponsePlayer.matches).to.be.empty;
+            expect(matchResponsePlayer.playerMatches).to.be.empty;
         });
 
     });
