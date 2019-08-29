@@ -59,24 +59,24 @@
   },
   "dependencies": {
     "@alexa-games/gameon-sdk": "^0.0.1",
-    "aws-sdk": "^2.404.0",
-    "ordinal": "^1.0.2",
-    "random-words": "^1.1.0",
-    "uuid": "^3.3.2"
+    "aws-sdk": "2.519.0",
+    "ordinal": "1.0.3",
+    "random-words": "1.1.0",
+    "uuid": "3.3.3"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/mocha": "^5.2.6",
-    "@types/sinon": "^7.0.6",
-    "@types/uuid": "^3.4.4",
-    "chai": "^4.2.0",
-    "mocha": "^6.0.1",
-    "nyc": "^13.3.0",
-    "sinon": "^7.2.4",
-    "source-map-support": "^0.5.10",
-    "ts-node": "^8.0.2",
-    "tsconfig-paths": "^3.8.0",
-    "tslint": "^5.12.1",
-    "typescript": "^3.3.3333"
+    "@types/chai": "4.2.0",
+    "@types/mocha": "5.2.7",
+    "@types/sinon": "7.0.13",
+    "@types/uuid": "3.4.5",
+    "chai": "4.2.0",
+    "mocha": "6.2.0",
+    "nyc": "13.3.0",
+    "sinon": "7.4.1",
+    "source-map-support": "0.5.13",
+    "ts-node": "8.3.0",
+    "tsconfig-paths": "3.8.0",
+    "tslint": "5.19.0",
+    "typescript": "3.3.3333"
   }
 }
