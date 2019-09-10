@@ -1,12 +1,7 @@
 {
   "type": "APL",
-  "version": "1.0",
-  "import": [
-    {
-      "name": "alexa-layouts",
-      "version": "1.0.0"
-    }
-  ],
+  "version": "1.1",
+  "import": [],
   "layouts": {
     "playerAvatar": {
       "parameters": [
@@ -14,7 +9,7 @@
         "colorHex",
         "size"
       ],
-      "item": [
+      "items": [
         {
           "type": "Container",
           "width": "${size}",
@@ -28,7 +23,7 @@
               "borderColor": "#fff",
               "borderRadius": "${size}",
               "borderWidth": "3",
-              "item": [
+              "items": [
                 {
                   "type": "Container",
                   "width": "100%",
@@ -36,7 +31,7 @@
                   "justifyContent": "center",
                   "direction": "row",
                   "alignItems": "center",
-                  "item": [
+                  "items": [
                     {
                       "type": "Image",
                       "width": "60%",
@@ -50,16 +45,16 @@
             }
           ]
         }
-
       ]
     },
     "rankList": {
       "parameters": [
         "listData",
         "height",
-        "rowHeight"
+        "rowHeight",
+        "currentPlayerName"
       ],
-      "item": [
+      "items": [
         {
           "type": "Container",
           "direction": "column",
@@ -71,6 +66,7 @@
               "data": "${listData}",
               "scrollDirection": "vertical",
               "height": "100%",
+              "width": "100%",
               "items": [
                 {
                   "type": "Frame",
@@ -78,7 +74,7 @@
                   "width": "100%",
                   "backgroundColor": "rgba(255, 255, 255, 0.5)",
                   "borderWidth": "1",
-                  "item": [
+                  "items": [
                     {
                       "type": "rankListItem",
                       "image": "${data.profile.avatar}",
@@ -87,7 +83,7 @@
                       "rank": "${data.score.rank}",
                       "colorHex": "${data.profile.color}",
                       "height": "${rowHeight}",
-                      "isCurrentPlayer": "${data.isCurrentPlayer}"
+                      "isCurrentPlayer": "${data.profile.name == currentPlayerName}"
                     }
                   ]
                 },
@@ -96,7 +92,7 @@
                   "when": "${data.score.rank % 2 == 0}",
                   "width": "100%",
                   "borderWidth": "1",
-                  "item": [
+                  "items": [
                     {
                       "type": "rankListItem",
                       "image": "${data.profile.avatar}",
@@ -105,7 +101,7 @@
                       "rank": "${data.score.rank}",
                       "colorHex": "${data.profile.color}",
                       "height": "${rowHeight}",
-                      "isCurrentPlayer": "${data.isCurrentPlayer}"
+                      "isCurrentPlayer": "${data.profile.name == currentPlayerName}"
                     }
                   ]
                 }
@@ -125,17 +121,19 @@
         "height",
         "isCurrentPlayer"
       ],
-      "item": [
+      "items": [
         {
           "type": "Container",
           "style": "rankListItem",
+          "width": "100%",
+          "height": "${height}",
           "alignItems": "center",
           "direction": "row",
-          "height": "${height}",
+          "justifyContent": "spaceBetween",
           "items": [
             {
               "type": "Container",
-              "width": "${viewport.height < 500 ? '40' : '140'}",
+              "width": "${height}",
               "maxHeight": "100",
               "alignItems": "center",
               "direction": "row",
@@ -145,6 +143,7 @@
                   "type": "Image",
                   "when": "${rank == 1}",
                   "width": "${height}",
+                  "height": "${height}",
                   "source": "${payload.data.renderOptions.trophyUrl}"
                 },
                 {
@@ -158,10 +157,12 @@
             },
             {
               "type": "Container",
+              "width": "${height}",
+              "height": "${height}",
+              "alignItems": "center",
               "direction": "column",
               "justifyContent": "center",
-              "alignItems": "center",
-              "item": [
+              "items": [
                 {
                   "imageUrl": "${image}",
                   "colorHex": "${colorHex}",
@@ -169,37 +170,194 @@
                   "type": "playerAvatar",
                   "alignSelf": "center"
                 }
-              ]
+              ],
+              "spacing": "20"
             },
             {
               "type": "Container",
+              "paddingLeft": "${viewport.height < 500 ? '5' : '30'}",
               "alignItems": "center",
               "direction": "row",
-              "paddingLeft": "${viewport.height < 500 ? '5' : '30'}",
               "items": [
                 {
                   "type": "Text",
                   "style": "rankListItem",
+                  "color": "${isCurrentPlayer ? '#66298f' : '#555555'}",
                   "paddingTop": "0",
                   "paddingBottom": "0",
                   "maxLines": 1,
                   "text": "${name}",
-                  "fontWeight": "300",
+                  "fontWeight": "${isCurrentPlayer ? '500' : '300'}",
                   "grow": 1,
                   "shrink": 1
                 }
-              ]
+              ],
+              "spacing": "20",
+              "grow": 1
             },
             {
-              "type": "Text",
-              "style": "rankListItem",
-              "paddingRight": "30",
-              "textAlign": "right",
-              "maxLines": 1,
-              "text": "${score}",
-              "fontWeight": "300",
-              "grow": 1,
-              "shrink": 1
+              "type": "Container",
+              "items": [
+                {
+                  "type": "Text",
+                  "style": "rankListItem",
+                  "paddingRight": "30",
+                  "textAlign": "center",
+                  "maxLines": 1,
+                  "text": "${score}",
+                  "fontWeight": "300"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "playerPlaceHeader": {
+      "parameters": [
+        "payload",
+        "iconWidth",
+        "iconHeight"
+      ],
+      "items": [
+        {
+          "type": "Container",
+          "width": "80%",
+          "height": "100%",
+          "alignItems": "center",
+          "direction": "row",
+          "justifyContent": "center",
+          "items": [
+            {
+              "type": "Frame",
+              "width": "80%",
+              "height": "60%",
+              "minHeight": "100dp",
+              "items": [
+                {
+                  "type": "Container",
+                  "width": "100%",
+                  "height": "100%",
+                  "paddingTop": "10dp",
+                  "paddingBottom": "10dp",
+                  "alignItems": "center",
+                  "direction": "column",
+                  "justifyContent": "center",
+                  "items": [
+                    {
+                      "type": "Text",
+                      "style": "scorePrimary",
+                      "width": "80%",
+                      "minWidth": "150dp",
+                      "height": "60%",
+                      "paddingLeft": "40dp",
+                      "paddingTop": "0",
+                      "textAlignVertical": "top",
+                      "text": "You placed ${payload.data.player.score.ordinalRank}!"
+                    },
+                    {
+                      "type": "Text",
+                      "style": "scoreSecondary",
+                      "width": "80%",
+                      "minWidth": "150dp",
+                      "height": "40%",
+                      "paddingLeft": "40dp",
+                      "paddingTop": "0",
+                      "textAlignVertical": "bottom",
+                      "text": "${payload.data.player.score.score} points"
+                    }
+                  ]
+                }
+              ],
+              "backgroundColor": "#1da1a3",
+              "borderRadius": "20"
+            },
+            {
+              "type": "Image",
+              "when": "${viewport.width <= 480}",
+              "source": "${payload.data.renderOptions.logoImageUrl}",
+              "width": "${iconWidth}",
+              "height": "${iconHeight}",
+              "position": "absolute",
+              "right": "30",
+              "top": "30"
+            },
+            {
+              "type": "Image",
+              "when": "${viewport.width > 480}",
+              "source": "${payload.data.renderOptions.logoImageUrl}",
+              "width": "${iconWidth}",
+              "height": "${iconHeight}",
+              "position": "absolute",
+              "right": "0"
+            }
+          ]
+        }
+      ]
+    },
+    "playerScoreHeader": {
+      "parameters": [
+        "payload"
+      ],
+      "items": [
+        {
+          "type": "Container",
+          "height": "100%",
+          "width": "100%",
+          "paddingLeft": "0",
+          "paddingTop": "25",
+          "paddingRight": "0",
+          "paddingBottom": "25",
+          "items": [
+            {
+              "type": "Frame",
+              "width": "100%",
+              "height": "100%",
+              "backgroundColor": "#66298f",
+              "borderColor": "#ffffff",
+              "borderRadius": "20",
+              "borderWidth": "${viewport.width < 500 ? '2' : '4'}",
+              "items": [
+                {
+                  "type": "Container",
+                  "width": "100%",
+                  "height": "100%",
+                  "alignItems": "center",
+                  "direction": "row",
+                  "justifyContent": "center",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "when": "${payload.data.player.score.rank == 1}",
+                      "width": "100",
+                      "height": "60",
+                      "source": "${payload.data.renderOptions.trophyImageUrl}"
+                    },
+                    {
+                      "type": "Container",
+                      "alignItems": "center",
+                      "direction": "row",
+                      "justifyContent": "center",
+                      "items": [
+                        {
+                          "imageUrl": "${payload.data.player.profile.avatar}",
+                          "colorHex": "${payload.data.player.profile.color}",
+                          "size": "60",
+                          "type": "playerAvatar",
+                          "alignSelf": "center"
+                        },
+                        {
+                          "spacing": "10",
+                          "type": "Text",
+                          "style": "playerScoreText",
+                          "text": "${payload.data.player.profile.name}",
+                          "fontWeight": "300"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -228,294 +386,303 @@
           },
           {
             "type": "Container",
-            "when": "${viewport.height < 500}",
-            "paddingLeft": "${viewport.width < 500 ? '0' : '0'}",
-            "paddingTop": "${viewport.width < 500 ? '30' : '0'}",
-            "paddingRight": "${viewport.width < 500 ? '0' : '0'}",
-            "paddingBottom": "${viewport.width < 500 ? '30' : '20'}",
-            "height": "${viewport.width < 500 ? '130' : '125'}",
-            "alignItems": "center",
-            "direction": "row",
-            "justifyContent": "center",
+            "height": "100%",
+            "width": "100%",
             "items": [
               {
-                "type": "Frame",
-                "width": "60%",
-                "height": "90%",
-                "backgroundColor": "${payload.data.renderOptions.primaryColor}",
-                "borderColor": "#ffffff",
-                "borderRadius": "10",
+                "when": "${viewport.height == 480 && viewport.width == 480}",
+                "type": "Container",
+                "id": "topContainer",
+                "style": "topContainer",
+                "width": "100%",
+                "height": "250dp",
+                "paddingLeft": "0",
+                "paddingTop": "0",
+                "paddingRight": "0",
+                "paddingBottom": "0",
+                "alignItems": "center",
+                "justifyContent": "center",
                 "items": [
-
                   {
-                    "type": "Container",
-                    "paddingTop": "${viewport.width < 500 ? '0' : '20px' }",
-                    "alignItems": "center",
-                    "direction": "column",
-                    "height": "90px",
-                    "justifyContent": "start",
-                    "item": [
+                    "payload": "${payload}",
+                    "iconWidth": "80px",
+                    "iconHeight": "80px",
+                    "type": "playerPlaceHeader",
+                    "height": "100dp"
+                  },
+                  {
+                    "payload": "${payload}",
+                    "type": "playerScoreHeader",
+                    "height": "140dp",
+                    "width": "440dp"
+                  }
+                ]
+              },
+              {
+                "when": "${viewport.height == 480 && viewport.width == 960}",
+                "type": "Container",
+                "id": "topContainer",
+                "style": "topContainer",
+                "width": "100%",
+                "height": "260dp",
+                "paddingLeft": "0",
+                "paddingTop": "0",
+                "paddingRight": "0",
+                "paddingBottom": "0",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "items": [
+                  {
+                    "payload": "${payload}",
+                    "iconWidth": "130px",
+                    "iconHeight": "100px",
+                    "type": "playerPlaceHeader",
+                    "height": "100dp"
+                  },
+                  {
+                    "payload": "${payload}",
+                    "type": "playerScoreHeader",
+                    "height": "140dp",
+                    "width": "800dp"
+                  }
+                ]
+              },
+              {
+                "when": "${viewport.height == 600 && viewport.width == 1024}",
+                "type": "Container",
+                "id": "topContainer",
+                "style": "topContainer",
+                "width": "100%",
+                "height": "300dp",
+                "paddingLeft": "0",
+                "paddingTop": "0",
+                "paddingRight": "0",
+                "paddingBottom": "0",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "items": [
+                  {
+                    "payload": "${payload}",
+                    "iconWidth": "180px",
+                    "iconHeight": "140px",
+                    "type": "playerPlaceHeader",
+                    "height": "180dp"
+                  },
+                  {
+                    "payload": "${payload}",
+                    "type": "playerScoreHeader",
+                    "height": "140dp",
+                    "width": "800dp"
+                  }
+                ]
+              },
+              {
+                "when": "${viewport.height == 800 && viewport.width == 1280}",
+                "type": "Container",
+                "id": "topContainer",
+                "style": "topContainer",
+                "width": "100%",
+                "height": "380dp",
+                "paddingLeft": "0",
+                "paddingTop": "0",
+                "paddingRight": "0",
+                "paddingBottom": "0",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "items": [
+                  {
+                    "payload": "${payload}",
+                    "iconWidth": "180px",
+                    "iconHeight": "140px",
+                    "type": "playerPlaceHeader",
+                    "height": "210dp"
+                  },
+                  {
+                    "payload": "${payload}",
+                    "type": "playerScoreHeader",
+                    "height": "140dp",
+                    "width": "1000dp"
+                  }
+                ]
+              },
+              {
+                "when": "${viewport.height > 1000}",
+                "type": "Container",
+                "id": "topContainer",
+                "style": "topContainer",
+                "width": "100%",
+                "height": "365dp",
+                "paddingLeft": "0",
+                "paddingTop": "0",
+                "paddingRight": "0",
+                "paddingBottom": "0",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "items": [
+                  {
+                    "payload": "${payload}",
+                    "iconWidth": "130px",
+                    "iconHeight": "100px",
+                    "type": "playerPlaceHeader"
+                  },
+                  {
+                    "payload": "${payload}",
+                    "type": "playerScoreHeader"
+                  }
+                ]
+              },
+              {
+                "type": "Container",
+                "when": "${viewport.height == 480 && viewport.width == 480}",
+                "id": "bottomContainer",
+                "width": "100%",
+                "height": "180dp",
+                "paddingLeft": "0",
+                "paddingTop": "0",
+                "paddingRight": "0",
+                "paddingBottom": "0",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "items": [
+                  {
+                    "type": "Frame",
+                    "backgroundColor": "rgba(255, 255, 255, 0.8)",
+                    "borderRadius": "12",
+                    "height": "100%",
+                    "items": [
                       {
-                        "type": "Text",
-                        "style": "scorePrimary",
-                        "text": "You placed ${payload.data.player.score.rank}!"
-                      },
-                      {
-                        "type": "Text",
-                        "style": "scoreSecondary",
-                        "text": "${payload.data.player.score.score} points"
+                        "type": "rankList",
+                        "height": "100%",
+                        "width": "400dp",
+                        "rowHeight": "43",
+                        "listData": "${payload.data.leaderboard}",
+                        "currentPlayerName": "${payload.data.player.profile.name}"
                       }
                     ]
                   }
                 ]
               },
               {
-                "type": "Image",
-                "when": "${payload.data.renderOptions.logoImageUrl}",
-                "width": "${viewport.width > 500 ? '130' : '86' }",
-                "height": "${viewport.width > 500 ? '100' : '66' }",
-                "position": "absolute",
-                "top": "${viewport.width > 500 ? '10' : '60' }",
-                "right": "${viewport.width > 500 ? '140' : '70' }",
-                "source": "${payload.data.renderOptions.logoImageUrl}"
-              }
-            ]
-          },
-          {
-            "type": "Container",
-            "when": "${viewport.height > 499}",
-            "paddingLeft": "${viewport.width < 500 ? '0' : '200'}",
-            "paddingTop": "${viewport.width < 500 ? '30' : '40'}",
-            "paddingRight": "${viewport.width < 500 ? '0' : '200'}",
-            "paddingBottom": "${viewport.width < 500 ? '30' : '20'}",
-            "height": "${viewport.width < 500 ? '130' : '171'}",
-            "alignItems": "center",
-            "direction": "column",
-            "justifyContent": "center",
-            "item": [
-              {
-                "type": "Frame",
+                "when": "${viewport.height == 480 && viewport.width == 960}",
+                "type": "Container",
+                "id": "bottomContainer",
                 "width": "100%",
-                "height": "100%",
-                "backgroundColor": "${payload.data.renderOptions.primaryColor}",
-                "borderRadius": "8",
-                "item": [
+                "height": "210dp",
+                "paddingLeft": "0",
+                "paddingTop": "0",
+                "paddingRight": "0",
+                "paddingBottom": "0",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "items": [
                   {
-                    "type": "Container",
-                    "alignItems": "center",
-                    "direction": "column",
-                    "justifyContent": "center",
-                    "item": [
+                    "type": "Frame",
+                    "backgroundColor": "rgba(255, 255, 255, 0.8)",
+                    "borderRadius": "12",
+                    "height": "100%",
+                    "items": [
                       {
-                        "type": "Text",
-                        "style": "scorePrimary",
-                        "text": "You placed ${payload.data.player.score.rank}!"
-                      },
-                      {
-                        "type": "Text",
-                        "style": "scoreSecondary",
-                        "text": "${payload.data.player.score.score} points"
+                        "type": "rankList",
+                        "height": "100%",
+                        "width": "800dp",
+                        "rowHeight": "50",
+                        "listData": "${payload.data.leaderboard}",
+                        "currentPlayerName": "${payload.data.player.profile.name}"
                       }
                     ]
                   }
                 ]
               },
               {
-                "when": "${payload.data.renderOptions.logoImageUrl}",
-                "type": "Image",
-                "width": "${viewport.width > 500 ? '171' : '86' }",
-                "height": "${viewport.width > 500 ? '132' : '66' }",
-                "source": "${payload.data.renderOptions.logoImageUrl}",
-                "position": "absolute",
-                "top": "${viewport.width > 500 ? '30' : '60' }",
-                "right": "${viewport.width > 500 ? '140' : '70' }"
-              }
-            ]
-          },
-          {
-            "type": "Container",
-            "height": "140",
-            "paddingLeft": "${viewport.width < 500 ? '20' : '100'}",
-            "paddingTop": "25",
-            "paddingRight": "${viewport.width < 500 ? '20' : '100'}",
-            "paddingBottom": "25",
-            "item": [
-              {
-                "type": "Frame",
+                "when": "${viewport.height == 600 && viewport.width == 1024}",
+                "type": "Container",
+                "id": "bottomContainer",
                 "width": "100%",
-                "height": "100%",
-                "backgroundColor": "${payload.data.renderOptions.secondaryColor}",
-                "borderColor": "#ffffff",
-                "borderRadius": "20",
-                "borderWidth": "${viewport.width < 500 ? '2' : '4'}",
-                "item":
-                {
-                  "type": "Container",
-                  "height": "90",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "direction": "row",
-                  "items": [
-                    {
-                      "type": "Image",
-                      "when": "${payload.data.player.score.rank == 1}",
-                      "width": "100",
-                      "height": "60",
-                      "source": "${payload.data.renderOptions.trophyUrl}",
-                      "paddingLeft": "60px"
-                    },
-                    {
-                      "type": "Container",
-                      "justifyContent": "center",
-                      "alignItems": "center",
-                      "paddingLeft": "${viewport.height < 500 ? '30' : '60'}",
-                      "direction": "row",
-                      "items": [
-                        {
-                          "type": "Text",
-                          "style": "playerScoreText",
-                          "paddingRight": 10,
-                          "when": "${payload.data.player.score.rank != 1}",
-                          "text": "${payload.data.player.score.rank}"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Container",
-                      "direction": "row",
-                      "alignItems": "center",
-                      "grow": 1,
-                      "justifyContent": "center",
-                      "items": [
-                        {
-                          "imageUrl": "${payload.data.player.profile.avatar}",
-                          "colorHex": "${payload.data.player.profile.color}",
-                          "size": "60",
-                          "type": "playerAvatar",
-                          "alignSelf": "center"
-                        },
-                        {
-                          "spacing": "10",
-                          "type": "Text",
-                          "style": "playerScoreText",
-                          "text": "${payload.data.player.profile.name}",
-                          "fontWeight": "300"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Text",
-                      "paddingRight": "${viewport.height < 500 ? '30' : '60'}",
-                      "style": "playerScoreText",
-                      "text": "${payload.data.player.score.score}",
-                      "fontWeight": "400"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "type": "Container",
-            "when": "${viewport.height > 600}",
-            "height": "400",
-            "position": "absolute",
-            "alignItems": "center",
-            "direction": "column",
-            "justifyContent": "center",
-            "width": "100vw",
-            "bottom": "20",
-            "item": [
-              {
-                "type": "Frame",
-                "backgroundColor": "rgba(255, 255, 255, 0.8)",
-                "borderRadius": "12",
-                "item": [
+                "height": "290dp",
+                "paddingLeft": "0",
+                "paddingTop": "0",
+                "paddingRight": "0",
+                "paddingBottom": "0",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "items": [
                   {
-                    "type": "rankList",
+                    "type": "Frame",
+                    "backgroundColor": "rgba(255, 255, 255, 0.8)",
+                    "borderRadius": "12",
                     "height": "100%",
-                    "width": "80vw",
-                    "rowHeight": "80",
-                    "listData": "${payload.data.leaderboard}"
+                    "items": [
+                      {
+                        "type": "rankList",
+                        "height": "100%",
+                        "width": "800dp",
+                        "rowHeight": "56",
+                        "listData": "${payload.data.leaderboard}",
+                        "currentPlayerName": "${payload.data.player.profile.name}"
+                      }
+                    ]
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "type": "Container",
-            "when": "${viewport.height < 800 && viewport.height > 500}",
-            "height": "260",
-            "position": "absolute",
-            "alignItems": "center",
-            "direction": "column",
-            "justifyContent": "center",
-            "width": "100vw",
-            "bottom": "20",
-            "item": [
+              },
               {
-                "type": "Frame",
-                "backgroundColor": "rgba(255, 255, 255, 0.8)",
-                "borderRadius": "12",
-                "item": [
+                "when": "${viewport.height == 800 && viewport.width == 1280}",
+                "type": "Container",
+                "id": "bottomContainer",
+                "width": "100%",
+                "height": "410dp",
+                "paddingLeft": "0",
+                "paddingTop": "0",
+                "paddingRight": "0",
+                "paddingBottom": "0",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "items": [
                   {
-                    "type": "rankList",
+                    "type": "Frame",
+                    "backgroundColor": "rgba(255, 255, 255, 0.8)",
+                    "borderRadius": "12",
                     "height": "100%",
-                    "width": "80vw",
-                    "rowHeight": "52",
-                    "listData": "${payload.data.leaderboard}"
+                    "items": [
+                      {
+                        "type": "rankList",
+                        "height": "100%",
+                        "width": "900dp",
+                        "rowHeight": "80",
+                        "listData": "${payload.data.leaderboard}",
+                        "currentPlayerName": "${payload.data.player.profile.name}"
+                      }
+                    ]
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "type": "Container",
-            "when": "${viewport.height < 500 && viewport.width > 500}",
-            "height": "210",
-            "position": "absolute",
-            "alignItems": "center",
-            "direction": "column",
-            "justifyContent": "center",
-            "width": "100vw",
-            "bottom": "10",
-            "item": [
+              },
               {
-                "type": "Frame",
-                "backgroundColor": "rgba(255, 255, 255, 0.8)",
-                "borderRadius": "12",
-                "item": [
+                "when": "${viewport.height > 1000}",
+                "type": "Container",
+                "id": "bottomContainer",
+                "width": "100%",
+                "height": "500dp",
+                "paddingLeft": "0",
+                "paddingTop": "0",
+                "paddingRight": "0",
+                "paddingBottom": "0",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "items": [
                   {
-                    "type": "rankList",
-                    "height": "100%",
-                    "width": "75vw",
-                    "rowHeight": "40",
-                    "listData": "${payload.data.leaderboard}"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "Container",
-            "when": "${viewport.width < 500}",
-            "height": "180",
-            "alignItems": "center",
-            "direction": "column",
-            "justifyContent": "center",
-            "width": "100%",
-            "item": [
-              {
-                "type": "Frame",
-                "backgroundColor": "rgba(255, 255, 255, 0.8)",
-                "borderRadius": "12",
-                "item": [
-                  {
-                    "type": "rankList",
-                    "height": "100%",
-                    "width": "300",
-                    "rowHeight": "36",
-                    "listData": "${payload.data.leaderboard}"
+                    "type": "Frame",
+                    "backgroundColor": "rgba(255, 255, 255, 0.8)",
+                    "borderRadius": "12",
+                    "height": "500dp",
+                    "items": [
+                      {
+                        "type": "rankList",
+                        "height": "100%",
+                        "width": "80vw",
+                        "rowHeight": "80",
+                        "listData": "${payload.data.leaderboard}",
+                        "currentPlayerName": "${payload.data.player.profile.name}"
+                      }
+                    ]
                   }
                 ]
               }
@@ -598,8 +765,16 @@
           "fontSize": "50"
         },
         {
-          "when": "${viewport.height < 500}",
-          "fontSize": "30"
+          "when": "${viewport.width <= 1024}",
+          "fontSize": "38"
+        },
+        {
+          "when": "${viewport.width <= 960}",
+          "fontSize": "32"
+        },
+        {
+          "when": "${viewport.width <= 480}",
+          "fontSize": "26"
         }
       ]
     },
@@ -611,8 +786,16 @@
           "fontSize": "34"
         },
         {
-          "when": "${viewport.height < 500}",
-          "fontSize": "20"
+          "when": "${viewport.width <= 1024}",
+          "fontSize": "32"
+        },
+        {
+          "when": "${viewport.width <= 960}",
+          "fontSize": "24"
+        },
+        {
+          "when": "${viewport.width <= 480}",
+          "fontSize": "19"
         }
       ]
     },
