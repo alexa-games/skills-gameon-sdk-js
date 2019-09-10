@@ -83,7 +83,7 @@
                       "rank": "${data.score.rank}",
                       "colorHex": "${data.profile.color}",
                       "height": "${rowHeight}",
-                      "isCurrentPlayer": "${data.profile.name == currentPlayerName}"
+                      "isCurrentPlayer": "${data.isCurrentPlayer}"
                     }
                   ]
                 },
@@ -101,7 +101,7 @@
                       "rank": "${data.score.rank}",
                       "colorHex": "${data.profile.color}",
                       "height": "${rowHeight}",
-                      "isCurrentPlayer": "${data.profile.name == currentPlayerName}"
+                      "isCurrentPlayer": "${data.isCurrentPlayer}"
                     }
                   ]
                 }
