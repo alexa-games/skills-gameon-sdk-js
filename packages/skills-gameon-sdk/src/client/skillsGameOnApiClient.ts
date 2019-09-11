@@ -860,10 +860,7 @@ export class SkillsGameOnApiClient extends GameOnApiClient {
         if (refreshBufferInMinutes !== undefined) {
             refreshBufferInMs = refreshBufferInMinutes * NUMBER_OF_SECONDS_PER_MINUTE * NUMBER_OF_MS_PER_SECOND;
         }
-        if (sessionExpirationDate - refreshBufferInMs > currentTimeInMs) {
-            return false;
-        }
-        return true;
+        return sessionExpirationDate - refreshBufferInMs <= currentTimeInMs;
     }
 
     private isAugmented(player: Player | AugmentedPlayer): player is AugmentedPlayer {
@@ -876,7 +873,8 @@ export class SkillsGameOnApiClient extends GameOnApiClient {
 
     private doLeaderboardsOverlap(higherRankLeaderboard: GetMatchLeaderboardResponseLeaderboardItem[],
                                   lowerRankLeaderboard: GetMatchLeaderboardResponseLeaderboardItem[] | undefined) {
-        if (!lowerRankLeaderboard || !lowerRankLeaderboard[0].rank || !higherRankLeaderboard[higherRankLeaderboard.length - 1].rank) {
+        if (!lowerRankLeaderboard || !lowerRankLeaderboard[0] || !lowerRankLeaderboard[0].rank ||
+            !higherRankLeaderboard[higherRankLeaderboard.length - 1].rank) {
             return false;
         }
         return lowerRankLeaderboard[0].rank <= higherRankLeaderboard[higherRankLeaderboard.length - 1].rank!; // Remove ! when GameOn model updated
