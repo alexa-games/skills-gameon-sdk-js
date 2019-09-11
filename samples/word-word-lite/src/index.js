@@ -63,11 +63,13 @@ const LaunchRequestHandler = {
     // Bootstrap new users by registering them with GameOn and persisting to DynamoDb
     if (Object.keys(player).length === 0) {
       player = await GameOn.newPlayer();
-      this.setPersistentAttributes(player);
-      await this.savePersistentAttributes();
+    } else {
+      player = await GameOn.refreshPlayerSession(player);
     }
+    this.setPersistentAttributes(player);
+    await this.savePersistentAttributes();
 
-    // Intialize a game session for the player.
+    // Initialize a game session for the player.
     attributes.currentWord = WordConstants.getWord();
     attributes.nextWord = WordConstants.getWord();
     this.setSessionAttributes(attributes);
