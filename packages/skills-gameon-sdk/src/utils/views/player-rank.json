@@ -141,14 +141,14 @@
               "items": [
                 {
                   "type": "Image",
-                  "when": "${rank == 1}",
+                  "when": "${rank == 1 && payload.data.renderOptions.trophyUrl}",
                   "width": "${height}",
                   "height": "${height}",
                   "source": "${payload.data.renderOptions.trophyUrl}"
                 },
                 {
                   "type": "Text",
-                  "when": "${rank != 1}",
+                  "when": "${rank != 1 || !payload.data.renderOptions.trophyUrl}",
                   "style": "rankListItem",
                   "textAlign": "center",
                   "text": "${rank}"
@@ -331,7 +331,7 @@
                       "when": "${payload.data.player.score.rank == 1}",
                       "width": "100",
                       "height": "60",
-                      "source": "${payload.data.renderOptions.trophyImageUrl}"
+                      "source": "${payload.data.renderOptions.trophyUrl}"
                     },
                     {
                       "type": "Container",
