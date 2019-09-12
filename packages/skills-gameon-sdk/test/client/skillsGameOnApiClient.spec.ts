@@ -489,7 +489,46 @@ describe('skillsGameOnApiClient', () => {
             expect(combinationLeaderboard.topNLeaderboard).to.deep.equal(topScorersLeaderboardResult.leaderboard);
         });
 
-        it('Returns topScores and neighbord boards if player is not in top score leaderboard', async () => {
+        it('Returns leaderboard when there is only one entry', async () => {
+            getLeaderboardResponse = {
+                leaderboard: [{
+                    externalPlayerId: 'a6dd07a6-1367-4c3a-a950-af399d5cee4b',
+                    rank: 1,
+                    playerName: 'Bob',
+                    score: 60
+                }]
+            };
+            const getLeaderboardStub = sinon.stub();
+
+            // stubbing neighborBoard
+            getLeaderboardStub.withArgs(
+                {
+                    matchId: getCombinationLeaderboardsParams.matchId,
+                    currentPlayerNeighbors: getCombinationLeaderboardsParams.playerNeighborsLimit,
+                    player: {}
+                }).returns(
+                {
+                    currentPlayer: neighborBoardResponse.currentPlayer
+                }
+            );
+
+            // stubbing topNBoard
+            getLeaderboardStub.withArgs({
+                matchId: getCombinationLeaderboardsParams.matchId,
+                limit: getCombinationLeaderboardsParams.topScoresLimit,
+                player: {}
+            }).returns(
+                topScorersLeaderboardResult
+            );
+
+            sinon.replace(skillsGameOnApiClient, 'getMatchLeaderboardForPlayer', getLeaderboardStub);
+
+            const combinationLeaderboard = await skillsGameOnApiClient.getCombinationLeaderboards(getCombinationLeaderboardsParams);
+            expect(combinationLeaderboard.neighborLeaderboard).to.be.empty;
+            expect(combinationLeaderboard.topNLeaderboard).to.deep.equal(topScorersLeaderboardResult.leaderboard);
+        });
+
+        it('Returns topScores and neighbor boards if player is not in top score leaderboard', async () => {
             getLeaderboardResponse = {
                 leaderboard: [{
                     externalPlayerId: 'a6dd07a6-1367-4c3a-a950-af399d5cee4b',
