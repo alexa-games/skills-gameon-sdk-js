@@ -71,7 +71,6 @@ async function enterMatch(alexaPlayer, client = defaultClient) {
  * @returns {Player}
  */
 async function submitScore(alexaPlayer, score, client = defaultClient) {
-    await refreshPlayerSession(alexaPlayer);
     await client.submitScoreForPlayer({
         matchId: settings.matchId,
         submitScoreRequest: { score },

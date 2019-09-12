@@ -48,20 +48,20 @@
     "test:coverage": "npx nyc mocha --require ts-node/register test/**/*.spec.ts"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/mocha": "^5.2.6",
-    "@types/nock": "^9.3.1",
-    "@types/sinon": "^7.0.6",
-    "chai": "^4.2.0",
-    "mocha": "^6.0.1",
-    "nock": "^10.0.6",
-    "nyc": "^13.3.0",
-    "sinon": "^7.2.4",
-    "source-map-support": "^0.5.10",
-    "ts-node": "^8.0.2",
-    "tsconfig-paths": "^3.8.0",
-    "tslint": "^5.12.1",
-    "typedoc": "^0.14.2",
-    "typescript": "^3.3.3333"
+    "@types/chai": "4.2.0",
+    "@types/mocha": "5.2.7",
+    "@types/nock": "9.3.1",
+    "@types/sinon": "7.0.13",
+    "chai": "4.2.0",
+    "mocha": "6.2.0",
+    "nock": "10.0.6",
+    "nyc": "13.3.0",
+    "sinon": "7.4.1",
+    "source-map-support": "0.5.13",
+    "ts-node": "8.3.0",
+    "tsconfig-paths": "3.8.0",
+    "tslint": "5.19.0",
+    "typedoc": "0.14.2",
+    "typescript": "3.3.3333"
   }
 }
