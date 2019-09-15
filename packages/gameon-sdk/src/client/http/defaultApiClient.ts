@@ -14,6 +14,16 @@ import { ApiClient, ApiClientRequest, ApiClientResponse } from './apiClient';
  * Default implementation of {@link ApiClient} which uses the native HTTP/HTTPS library of Node.JS.
  */
 export class DefaultApiClient implements ApiClient {
+    private httpClient: any;
+    private httpsClient: any;
+
+    constructor(
+        httpClient = require('http'),
+        httpsClient = require('https')
+    ) {
+        this.httpClient = httpClient;
+        this.httpsClient = httpsClient;
+    }
     /**
      * Dispatches a request to an API endpoint described in the request.
      * An ApiClient is expected to resolve the Promise in the case an API returns a non-200 HTTP
@@ -36,7 +46,7 @@ export class DefaultApiClient implements ApiClient {
             method : request.method
         };
 
-        const client = clientRequestOptions.protocol === 'https:' ? require('https') : require('http');
+        const client = clientRequestOptions.protocol === 'https:' ? this.httpsClient : this.httpClient;
 
         return new Promise<ApiClientResponse>((resolve, reject) => {
             const clientRequest = client.request(clientRequestOptions, (response) => {
