@@ -143,5 +143,6 @@ module.exports = {
     submitScore,
     getPlayerScore,
     enterMatch,
-    getLeaderboard
+    getLeaderboard,
+    refreshPlayerSession
 };
