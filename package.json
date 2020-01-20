@@ -16,7 +16,7 @@
     "test:skills-gameon-sdk": "npx lerna run test --scope @alexa-games/skills-gameon-sdk"
   },
   "devDependencies": {
-    "lerna": "3.13.2"
+    "lerna": "3.20.2"
   },
   "dependencies": {}
 }
