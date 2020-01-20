@@ -50,7 +50,7 @@
   "devDependencies": {
     "@types/chai": "4.2.0",
     "@types/mocha": "5.2.7",
-    "@types/nock": "9.3.1",
+    "@types/nock": "11.1.0",
     "@types/sinon": "7.0.13",
     "chai": "4.2.0",
     "mocha": "6.2.0",
