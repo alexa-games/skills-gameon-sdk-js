@@ -62,7 +62,7 @@
     "aws-sdk": "2.519.0",
     "ordinal": "1.0.3",
     "random-words": "1.1.0",
-    "uuid": "3.3.3"
+    "uuid": "3.4.0"
   },
   "devDependencies": {
     "@types/chai": "4.2.0",
