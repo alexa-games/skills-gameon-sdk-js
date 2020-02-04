@@ -59,7 +59,7 @@
   },
   "dependencies": {
     "@alexa-games/gameon-sdk": "^0.0.1",
-    "aws-sdk": "2.519.0",
+    "aws-sdk": "2.611.0",
     "ordinal": "1.0.3",
     "random-words": "1.1.0",
     "uuid": "3.3.3"
