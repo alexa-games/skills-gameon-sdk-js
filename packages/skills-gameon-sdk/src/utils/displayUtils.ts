@@ -58,7 +58,7 @@ interface RenderOptions {
     scorePrimaryText?: string;
 
     /**
-     * Leaderboard score primary text, default to `You placed ${player.score.ordinalRank}!` if not supplied
+     * Leaderboard score secondary text, default to `${player.score.score} points` if not supplied
      */
     scoreSecondaryText?: string;
 }
