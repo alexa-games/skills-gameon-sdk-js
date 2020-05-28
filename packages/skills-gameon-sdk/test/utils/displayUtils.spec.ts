@@ -109,7 +109,7 @@ describe('displayUtils', () => {
             }];
             const leaderboardApl = renderLeaderboard(player, combinationLeaderboard, renderOptions, generator);
             expect(leaderboardApl.datasources.data.player).to.eq(player);
-            expect(leaderboardApl.datasources.data.renderOptions).to.deep.eq(renderOptions);
+            expect(leaderboardApl.datasources.data.renderOptions).to.eq(renderOptions);
             expect(leaderboardApl.datasources.data.renderOptions.scorePrimaryText).to.eq(`You placed ${player.score.ordinalRank}!`);
             expect(leaderboardApl.datasources.data.renderOptions.scoreSecondaryText).to.eq(`${player.score.score} points`);
             expect(leaderboardApl.datasources.data.leaderboard).to.deep.eq(expectedLeaderboard);
