@@ -110,6 +110,8 @@ describe('displayUtils', () => {
             const leaderboardApl = renderLeaderboard(player, combinationLeaderboard, renderOptions, generator);
             expect(leaderboardApl.datasources.data.player).to.eq(player);
             expect(leaderboardApl.datasources.data.renderOptions).to.eq(renderOptions);
+            expect(leaderboardApl.datasources.data.renderOptions.scorePrimaryText).to.eq(`You placed ${player.score.ordinalRank}!`);
+            expect(leaderboardApl.datasources.data.renderOptions.scoreSecondaryText).to.eq(`${player.score.score} points`);
             expect(leaderboardApl.datasources.data.leaderboard).to.deep.eq(expectedLeaderboard);
         });
 
@@ -370,6 +372,51 @@ describe('displayUtils', () => {
             expect(leaderboardApl.datasources.data.renderOptions).to.eq(renderOptions);
             expect(leaderboardApl.datasources.data.leaderboard).to.deep.eq(expectedLeaderboard);
         });
+
+        it('Single player leaderboard with custom Leaderboard text', async () => {
+            const scorePrimaryText = 'You are in the top 1%';
+            const scoreSecondaryText = '8 stars';
+
+            const updatedTextRenderOption = {
+                ...renderOptions,
+                scorePrimaryText,
+                scoreSecondaryText
+            };
+
+            const player = {
+                score: {
+                    rank: 1,
+                    score: 22,
+                    ordinalRank: '1st'
+                },
+                profile: {
+                    name: 'Patiently Plain Lynx',
+                    avatar: '/37.png',
+                    color: 'cef2a0'
+                },
+                sessionApiKey: '5155ce02-1111-1111-2222-71882d1a52ad',
+                sessionId: '553c5f49-1111-1111-2222-fb2e5d43c0b5',
+                sessionExpirationDate: 0,
+                externalPlayerId: 'a99c89bd-1111-1111-2222-671b012cd1c4',
+                playerToken: '0774aba7-1111-1111-2222-c2355aebf8c8'
+            } as AugmentedPlayer;
+
+            const combinationLeaderboard = {
+                topNLeaderboard: [
+                    {
+                        externalPlayerId: player.externalPlayerId,
+                        score: player.score.score,
+                        rank: player.score.rank
+                    }
+                ],
+                neighborLeaderboard: []
+            } as CombinationLeaderboard;
+
+            const leaderboardApl = renderLeaderboard(player, combinationLeaderboard, updatedTextRenderOption, generator);
+            expect(leaderboardApl.datasources.data.renderOptions.scorePrimaryText).to.eq(scorePrimaryText);
+            expect(leaderboardApl.datasources.data.renderOptions.scoreSecondaryText).to.eq(scoreSecondaryText);
+        });
+
     });
 
 });

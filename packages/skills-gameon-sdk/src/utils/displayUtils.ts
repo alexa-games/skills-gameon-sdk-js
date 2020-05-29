@@ -52,6 +52,15 @@ interface RenderOptions {
      */
     secondaryColor?: string;
 
+    /**
+     * Leaderboard score primary text. Will default to `You placed ${player.score.ordinalRank}!` if not supplied
+     */
+    scorePrimaryText?: string;
+
+    /**
+     * Leaderboard score secondary text. Will default to `${player.score.score} points` if not supplied
+     */
+    scoreSecondaryText?: string;
 }
 
 /**
@@ -87,6 +96,12 @@ export function renderLeaderboard(player: AugmentedPlayer,
     }
     if (!renderOptions.secondaryColor) {
         renderOptions.secondaryColor = '#66298f';
+    }
+    if (!renderOptions.scorePrimaryText) {
+        renderOptions.scorePrimaryText = `You placed ${player.score.ordinalRank}!`;
+    }
+    if (!renderOptions.scoreSecondaryText) {
+        renderOptions.scoreSecondaryText = `${player.score.score} points`;
     }
 
     return {
