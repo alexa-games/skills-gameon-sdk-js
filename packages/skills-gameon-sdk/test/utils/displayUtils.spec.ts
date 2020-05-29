@@ -373,8 +373,8 @@ describe('displayUtils', () => {
             expect(leaderboardApl.datasources.data.leaderboard).to.deep.eq(expectedLeaderboard);
         });
 
-        it('Single player leaderboard with custom Leaderbaord text', async () => {
-            const scorePrimaryText = 'You are on top 1%';
+        it('Single player leaderboard with custom Leaderboard text', async () => {
+            const scorePrimaryText = 'You are in the top 1%';
             const scoreSecondaryText = '8 stars';
 
             const updatedTextRenderOption = {
