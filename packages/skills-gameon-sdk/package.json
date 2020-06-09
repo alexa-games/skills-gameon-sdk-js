@@ -1,6 +1,6 @@
 {
   "name": "@alexa-games/skills-gameon-sdk",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "Alexa Skills SDK for Amazon GameOn",
   "keywords": [
     "amazon",
