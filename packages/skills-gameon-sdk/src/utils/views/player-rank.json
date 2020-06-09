@@ -253,7 +253,7 @@
                       "paddingLeft": "40dp",
                       "paddingTop": "0",
                       "textAlignVertical": "top",
-                      "text": "You placed ${payload.data.player.score.ordinalRank}!"
+                      "text": "${payload.data.renderOptions.scorePrimaryText}"
                     },
                     {
                       "type": "Text",
@@ -264,7 +264,7 @@
                       "paddingLeft": "40dp",
                       "paddingTop": "0",
                       "textAlignVertical": "bottom",
-                      "text": "${payload.data.player.score.score} points"
+                      "text": "${payload.data.renderOptions.scoreSecondaryText}"
                     }
                   ]
                 }
